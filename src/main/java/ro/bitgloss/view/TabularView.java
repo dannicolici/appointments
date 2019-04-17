@@ -5,7 +5,7 @@ import ro.bitgloss.data.DataSource;
 
 public class TabularView implements View {
 
-  public static final String PAD = "          ";
+  private static final String PAD = "          ";
 
   @Override
   public String display(DataSource ds) {
@@ -23,8 +23,8 @@ public class TabularView implements View {
   private StringBuilder data(DataSource ds) {
     StringBuilder sb = new StringBuilder();
     ds.stream().forEach(row -> {
-      row.forEach(d -> sb.append(" ").append(cell(d)));
-      sb.append(" \n");
+      row.forEach(d -> sb.append(cell(d)));
+      sb.append("\n");
     });
     return sb;
   }

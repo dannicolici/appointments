@@ -6,10 +6,15 @@ import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
 import ro.bitgloss.dao.AppointmentDAO;
+import ro.bitgloss.data.DataSource;
 import ro.bitgloss.domain.Appointment;
+import ro.bitgloss.view.TabularView;
+import ro.bitgloss.view.View;
 
 public class AppointmentManager {
 
@@ -23,34 +28,35 @@ public class AppointmentManager {
   public void printAppointments() {
     List<Appointment> appointments = dao.getAllAppointments();
     if (appointments != null) {
-      displayLine("---------------------------------------------------------------------------------");
-      displayLine("|          TIME          |          DOCTOR          |          PATIENT          |");
-      displayLine("---------------------------------------------------------------------------------");
-      for (Appointment a : appointments) {
-        Date date = a.getDate();
-        long time = date != null ? date.getTime() : new Date(1970, 1, 1).getTime();
-        // appointments older than 6 months are marked as EXPIRED    
-        if ((System.currentTimeMillis() - time) / 1000 > 3600 * 24 * 30 * 6) {
-          display("          ");
-          display("EXPIRED   ");
-          display("          ");
-        } else {
-          display("          ");
-          display(DF.format(a.getDate()));
-          display("          ");
-        }
-        display("          ");
-        display(a.getDoctor());
-        display("          ");
-        display("          ");
-        display(a.getPatient());
-        display("          ");
-        displayLine("");
-      }
-      displayLine("---------------------------------------------------------------------------------");
+      View view = new TabularView();      
+      display(view.display(createDataSource(appointments)));
     } else {
       displayLine("No appointments found");
     }
+  }
+
+  private DataSource createDataSource(List<Appointment> appointments) {
+    return new DataSource() {
+      @Override
+      public List<String> entryDetails() {
+        return Arrays.asList("TIME", "DOCTOR", "PATIENT");
+      }
+
+      @Override
+      public Stream<List<String>> stream() {
+        return appointments.stream()
+            .map(a -> 
+              Arrays.asList(
+                  isExpired(a.getDate()) ? "EXPIRED" : DF.format(a.getDate()),
+                  a.getDoctor(),
+                  a.getPatient()));
+      }
+    };
+  }
+
+  private boolean isExpired(Date date) {
+    long time = date != null ? date.getTime() : new Date(1970, 1, 1).getTime();
+    return (System.currentTimeMillis() - time) / 1000 > 3600 * 24 * 30 * 6;
   }
 
   private void display(Object o) {

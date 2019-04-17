@@ -29,7 +29,7 @@ public class TabularViewTest {
         "--------------------------\n" +
         "|          text          |\n" +
         "--------------------------\n" +
-        "           data           \n" +
+        "          data          \n" +
         "--------------------------\n";
     
     String actual = new TabularView().display(ds);

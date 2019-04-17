@@ -29,25 +29,6 @@ public class AppointmentManagerTest {
     out = mock(PrintStream.class);
     System.setOut(out);
   }
-
-  @Test
-  public void testPrintAppointments() {
-    Appointment appointment = new Appointment();
-    appointment.setDate(new Date(2019 - 1900, 11, 2));
-    appointment.setDoctor("doctor");
-    appointment.setPatient("patient");
-    dao.saveAppointment(appointment);
-    appointmentManager.printAppointments();
-    ArgumentCaptor<Object> argumentCaptor = ArgumentCaptor.forClass(Object.class);
-    verify(out, times(14)).print(argumentCaptor.capture());
-    List<String> printout = Arrays.asList(
-          "---------------------------------------------------------------------------------\n"
-        , "|          TIME          |          DOCTOR          |          PATIENT          |\n"
-        , "---------------------------------------------------------------------------------\n"
-        , "          ","02/12/2019","          ","          ","doctor","          ","          ","patient","          ","\n"
-        , "---------------------------------------------------------------------------------\n");
-    assertEquals(printout, argumentCaptor.getAllValues());
-  }
   
   @Test
   public void testInputNewAppointment() {
