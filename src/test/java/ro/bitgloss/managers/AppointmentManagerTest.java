@@ -2,15 +2,12 @@ package ro.bitgloss.managers;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
 import ro.bitgloss.dao.AppointmentDAO;
 import ro.bitgloss.domain.Appointment;
 
 import java.io.ByteArrayInputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;

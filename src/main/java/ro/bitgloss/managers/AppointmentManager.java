@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 import ro.bitgloss.dao.AppointmentDAO;
 import ro.bitgloss.data.DataSource;
 import ro.bitgloss.domain.Appointment;
+import ro.bitgloss.view.ListView;
 import ro.bitgloss.view.TabularView;
 import ro.bitgloss.view.View;
 
@@ -25,10 +26,9 @@ public class AppointmentManager {
     this.dao = dao;
   }
 
-  public void printAppointments() {
+  public void printAppointments(View view) {
     List<Appointment> appointments = dao.getAllAppointments();
-    if (appointments != null) {
-      View view = new TabularView();      
+    if (appointments != null && !appointments.isEmpty()) {      
       display(view.display(createDataSource(appointments)));
     } else {
       displayLine("No appointments found");
