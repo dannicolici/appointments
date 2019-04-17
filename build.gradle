@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+}
+
+group 'ro.bitgloss'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    test.useJUnitPlatform()
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.4.2'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.27.0'
+
+    testRuntime("org.junit.platform:junit-platform-launcher:1.4.2")
+    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.4.2")
+    testRuntime("org.junit.vintage:junit-vintage-engine:5.4.2")
+}
