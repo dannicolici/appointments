@@ -1,23 +1,45 @@
 package ro.bitgloss.dao;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import ro.bitgloss.data.DataSource;
 import ro.bitgloss.domain.Appointment;
 
-public class AppointmentDAO {
-  
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
+
+public class AppointmentDAO implements DataSource {
+
   private static List<Appointment> DB = new ArrayList<>();
 
-  public List<Appointment> getAllAppointments() {
-    return Collections.unmodifiableList(DB);
+  public int appointmentsCount() {
+    return DB.size();
+  }
+
+  public Appointment findByIndex(int index) {
+    return DB.get(index);
   }
 
   public void saveAppointment(Appointment appointment) {
     DB.add(appointment);
   }
-  
+
   public void deleteAllAppointments() {
     DB.clear();
+  }
+
+  @Override
+  public List<String> entryDetails() {
+    return Arrays.asList("TIME", "DOCTOR", "PATIENT");
+  }
+
+  @Override
+  public Stream<List<String>> stream() {
+    return DB.stream()
+            .map(a ->
+                    Arrays.asList(
+                            a.isExpired() ? "EXPIRED" : a.getFormattedDateString(),
+                            a.getDoctor(),
+                            a.getPatient()));
   }
 }

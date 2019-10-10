@@ -1,9 +1,13 @@
 package ro.bitgloss.domain;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 public class Appointment {
+
+  public static DateFormat DF = new SimpleDateFormat("dd/MM/yyyy");
 
   private long id;
   private Date date;
@@ -49,5 +53,14 @@ public class Appointment {
 
   public void setId(long id) {
     this.id = id;
+  }
+
+  public boolean isExpired() {
+    long time = date != null ? date.getTime() : new Date(1970, 1, 1).getTime();
+    return (System.currentTimeMillis() - time) / 1000 > 3600 * 24 * 30 * 6;
+  }
+
+  public String getFormattedDateString() {
+    return DF.format(date);
   }
 }
