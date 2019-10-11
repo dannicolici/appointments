@@ -1,7 +1,8 @@
-package ro.bitgloss.managers;
+package ro.bitgloss;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import ro.bitgloss.Application;
 import ro.bitgloss.dao.AppointmentDAO;
 import ro.bitgloss.domain.Appointment;
 
@@ -10,16 +11,14 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AppointmentManagerTest {
+public class ReadAppointmentTest {
 
   private AppointmentDAO dao;
-  private AppointmentManager appointmentManager;
 
   @BeforeEach
   public void setUp() {
     dao = new AppointmentDAO();
     dao.deleteAllAppointments();
-    appointmentManager = new AppointmentManager(dao);
   }
   
   @Test
@@ -27,7 +26,7 @@ public class AppointmentManagerTest {
     String data = "20/10/2018\ndoctor\npatient\n";
     ByteArrayInputStream in = new ByteArrayInputStream(data.getBytes());
     System.setIn(in);
-    appointmentManager.inputNewAppointment();
+    Application.createNewAppointment(dao);
     assertEquals(1, dao.appointmentsCount());
     Appointment appointment = dao.findByIndex(0);
     assertEquals(new Date(2018 - 1900, 9, 20), appointment.getDate());

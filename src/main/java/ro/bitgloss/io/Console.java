@@ -3,6 +3,7 @@ package ro.bitgloss.io;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Optional;
 
 public class Console {
     private static BufferedReader SYS_IN_READER = new BufferedReader(new InputStreamReader(System.in));
@@ -22,6 +23,16 @@ public class Console {
         } catch (IOException e) {
             e.printStackTrace();
             return 'x';
+        }
+    }
+
+    public static Optional<String> readString(String prompt, String errMessage) {
+        print(prompt);
+        try {
+            return Optional.of(SYS_IN_READER.readLine());
+        } catch (IOException e) {
+            printLine(errMessage);
+            return Optional.empty();
         }
     }
 }
