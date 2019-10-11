@@ -1,7 +1,8 @@
 package ro.bitgloss.view;
 
-import java.util.List;
 import ro.bitgloss.data.DataSource;
+
+import java.util.List;
 
 public class TabularView implements View {
 

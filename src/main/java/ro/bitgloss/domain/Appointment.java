@@ -1,8 +1,5 @@
 package ro.bitgloss.domain;
 
-import ro.bitgloss.io.TypedIO;
-
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 

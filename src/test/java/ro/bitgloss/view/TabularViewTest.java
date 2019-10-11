@@ -1,12 +1,12 @@
 package ro.bitgloss.view;
 
+import org.junit.jupiter.api.Test;
+import ro.bitgloss.data.DataSource;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
-
-import org.junit.jupiter.api.Test;
-import ro.bitgloss.data.DataSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
