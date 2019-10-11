@@ -4,14 +4,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ro.bitgloss.dao.AppointmentDAO;
 import ro.bitgloss.domain.Appointment;
-import ro.bitgloss.io.IO;
 import ro.bitgloss.io.TypedIO;
 
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ReadAppointmentTest {
+public class CreateNewAppointmentTest {
 
   private AppointmentDAO dao;
   private TestIO io;
@@ -45,7 +44,7 @@ public class ReadAppointmentTest {
   }
   
   @Test
-  public void testInputNewAppointment() {
+  public void input_new_valid_appointment() {
     io.readBuffer.offer("20/10/2018");
     io.readBuffer.offer("doctor");
     io.readBuffer.offer("patient");
@@ -60,7 +59,7 @@ public class ReadAppointmentTest {
   }
 
   @Test
-  public void testInputInvalidDateOnNewAppointment() {
+  public void input_invalid_date_on_new_appointment() {
     io.readBuffer.offer("xyz");
     io.readBuffer.offer("20/10/2018");
     io.readBuffer.offer("doctor");
