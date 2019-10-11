@@ -2,6 +2,7 @@ package ro.bitgloss.dao;
 
 import ro.bitgloss.data.DataSource;
 import ro.bitgloss.domain.Appointment;
+import ro.bitgloss.io.TypedIO;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +39,7 @@ public class AppointmentDAO implements DataSource {
     return DB.stream()
             .map(a ->
                     Arrays.asList(
-                            a.isExpired() ? "EXPIRED" : a.getFormattedDateString(),
+                            a.isExpired() ? "EXPIRED" : TypedIO.DF.format(a.getDate()),
                             a.getDoctor(),
                             a.getPatient()));
   }

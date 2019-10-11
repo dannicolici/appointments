@@ -5,18 +5,26 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Optional;
 
-public class Console {
+public class Console implements TypedIO {
     private static BufferedReader SYS_IN_READER = new BufferedReader(new InputStreamReader(System.in));
 
-    public static void print(Object o) {
+    private static final Console INSTANCE = new Console();
+
+    @Override
+    public void print(Object o) {
         System.out.print(o);
     }
 
-    public static void printLine(Object o) {
+    @Override
+    public void printLine(Object o) {
         print(o + "\n");
     }
 
-    public static char choice(String menu) {
+    public static Console getInstance() {
+        return INSTANCE;
+    }
+
+    public char choice(String menu) {
         printLine(menu);
         try {
             return SYS_IN_READER.readLine().charAt(0);
@@ -26,7 +34,8 @@ public class Console {
         }
     }
 
-    public static Optional<String> readString(String prompt, String errMessage) {
+    @Override
+    public Optional<String> readString(String prompt, String errMessage) {
         print(prompt);
         try {
             return Optional.of(SYS_IN_READER.readLine());
