@@ -49,7 +49,7 @@ public class CreateNewAppointmentTest {
     io.readBuffer.offer("doctor");
     io.readBuffer.offer("patient");
 
-    Application.createNewAppointment(dao, io);
+    Application.createNewAppointment().apply(dao, io);
 
     assertEquals(1, dao.appointmentsCount());
     Appointment appointment = dao.findByIndex(0);
@@ -65,7 +65,7 @@ public class CreateNewAppointmentTest {
     io.readBuffer.offer("doctor");
     io.readBuffer.offer("patient");
 
-    Application.createNewAppointment(dao, io);
+    Application.createNewAppointment().apply(dao, io);
 
     assertEquals(1, dao.appointmentsCount());
     Appointment appointment = dao.findByIndex(0);
