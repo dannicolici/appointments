@@ -14,7 +14,7 @@ public class TabularViewTest {
 
   @Test
   public void display() {
-    DataSource ds = new DataSource() {
+    var ds = new DataSource() {
       @Override
       public List<String> entryDetails() {
         return Arrays.asList("text");
@@ -25,14 +25,14 @@ public class TabularViewTest {
         return Stream.of(Collections.singletonList("data"));
       }
     };
-    String expected = 
+    var expected =
         "--------------------------\n" +
         "|          text          |\n" +
         "--------------------------\n" +
         "          data          \n" +
         "--------------------------\n";
     
-    String actual = new TabularView().display(ds);
+    var actual = new TabularView().display(ds);
     
     assertEquals(expected, actual);
   }

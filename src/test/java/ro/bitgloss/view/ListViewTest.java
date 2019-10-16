@@ -13,7 +13,7 @@ public class ListViewTest {
 
   @Test
   public void display() {
-    DataSource ds = new DataSource() {
+    var ds = new DataSource() {
       @Override
       public List<String> entryDetails() {
         return Arrays.asList("text, other text");
@@ -26,9 +26,9 @@ public class ListViewTest {
             Arrays.asList("x", "y"));
       }
     };
-    String expected = "Details (text, other text):\n- data, other data;\n- x, y;\n";
+    var expected = "Details (text, other text):\n- data, other data;\n- x, y;\n";
 
-    String actual = new ListView().display(ds);
+    var actual = new ListView().display(ds);
 
     assertEquals(expected, actual);
   }

@@ -52,7 +52,7 @@ public class CreateNewAppointmentTest {
     Application.createNewAppointment().apply(dao, io);
 
     assertEquals(1, dao.appointmentsCount());
-    Appointment appointment = dao.findByIndex(0);
+    var appointment = dao.findByIndex(0);
     assertEquals(new Date(2018 - 1900, 9, 20), appointment.getDate());
     assertEquals("doctor", appointment.getDoctor());
     assertEquals("patient", appointment.getPatient());
@@ -68,7 +68,7 @@ public class CreateNewAppointmentTest {
     Application.createNewAppointment().apply(dao, io);
 
     assertEquals(1, dao.appointmentsCount());
-    Appointment appointment = dao.findByIndex(0);
+    var appointment = dao.findByIndex(0);
     assertEquals(new Date(2018 - 1900, 9, 20), appointment.getDate());
     assertEquals("doctor", appointment.getDoctor());
     assertEquals("patient", appointment.getPatient());

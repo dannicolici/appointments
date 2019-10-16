@@ -23,7 +23,7 @@ public class Main {
     private static final TabularView TABULAR_VIEW = new TabularView();
     private static final AppointmentDAO DAO = new AppointmentDAO();
 
-    private static Map<Character, BiFunction<AppointmentDAO, ? super Console, IO>>
+    private static final Map<Character, BiFunction<AppointmentDAO, ? super Console, IO>>
     FUNCTION_TABLE = new HashMap<>() {
         {
             put('l', Application.displayAppointments(LIST_VIEW));

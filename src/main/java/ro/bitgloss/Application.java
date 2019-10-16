@@ -12,7 +12,7 @@ public class Application {
 
     public static BiFunction<AppointmentDAO, TypedIO, IO> createNewAppointment() {
         return (dao, io) -> {
-            Appointment appointment = new Appointment();
+            var appointment = new Appointment();
             io.readDate("Enter time: ", "invalid date", appointment::setDate);
             io.readString("Enter doctor: ", "", appointment::setDoctor);
             io.readString("Enter patient: ", "", appointment::setPatient);

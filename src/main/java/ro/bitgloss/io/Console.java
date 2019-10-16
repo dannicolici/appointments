@@ -28,9 +28,9 @@ public class Console implements TypedIO {
         printLine(menu);
         try {
             return SYS_IN_READER.readLine().charAt(0);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return 'x';
+        } catch (Exception e) {
+            printLine("Cannot read line. Try again.");
+            return choice(menu);
         }
     }
 

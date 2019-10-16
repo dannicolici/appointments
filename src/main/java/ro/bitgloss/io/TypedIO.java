@@ -20,7 +20,7 @@ public interface TypedIO extends IO {
     }
 
     default Date readDate(String prompt, String errorMessage, Consumer<Date> f) {
-        Date date = readDate(prompt, errorMessage);
+        var date = readDate(prompt, errorMessage);
         f.accept(date);
         return date;
     }
