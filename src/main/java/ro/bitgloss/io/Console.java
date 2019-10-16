@@ -38,7 +38,7 @@ public class Console implements TypedIO {
     public Optional<String> readString(String prompt, String errMessage) {
         print(prompt);
         try {
-            return Optional.of(SYS_IN_READER.readLine());
+            return Optional.ofNullable(SYS_IN_READER.readLine());
         } catch (IOException e) {
             printLine(errMessage);
             return Optional.empty();

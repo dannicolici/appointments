@@ -3,7 +3,6 @@ package ro.bitgloss;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ro.bitgloss.dao.AppointmentDAO;
-import ro.bitgloss.domain.Appointment;
 import ro.bitgloss.io.TypedIO;
 
 import java.util.*;
@@ -49,7 +48,7 @@ public class CreateNewAppointmentTest {
     io.readBuffer.offer("doctor");
     io.readBuffer.offer("patient");
 
-    Application.createNewAppointment().apply(dao, io);
+    Appointments.createNew().apply(dao, io);
 
     assertEquals(1, dao.appointmentsCount());
     var appointment = dao.findByIndex(0);
@@ -65,7 +64,7 @@ public class CreateNewAppointmentTest {
     io.readBuffer.offer("doctor");
     io.readBuffer.offer("patient");
 
-    Application.createNewAppointment().apply(dao, io);
+    Appointments.createNew().apply(dao, io);
 
     assertEquals(1, dao.appointmentsCount());
     var appointment = dao.findByIndex(0);

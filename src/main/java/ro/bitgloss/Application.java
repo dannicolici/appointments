@@ -1,35 +1,49 @@
 package ro.bitgloss;
 
 import ro.bitgloss.dao.AppointmentDAO;
-import ro.bitgloss.domain.Appointment;
+import ro.bitgloss.io.Console;
 import ro.bitgloss.io.IO;
-import ro.bitgloss.io.TypedIO;
-import ro.bitgloss.view.View;
+import ro.bitgloss.view.ListView;
+import ro.bitgloss.view.TabularView;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.BiFunction;
 
 public class Application {
+    private static final String MENU = "Menu\n" +
+    "l - list view\n" +
+    "t - tabular view\n" +
+    "a - add new appointment\n" +
+    "x - exit";
 
-    public static BiFunction<AppointmentDAO, TypedIO, IO> createNewAppointment() {
-        return (dao, io) -> {
-            var appointment = new Appointment();
-            io.readDate("Enter time: ", "invalid date", appointment::setDate);
-            io.readString("Enter doctor: ", "", appointment::setDoctor);
-            io.readString("Enter patient: ", "", appointment::setPatient);
+    private static final Console CONSOLE = Console.getInstance();
+    private static final ListView LIST_VIEW = new ListView();
+    private static final TabularView TABULAR_VIEW = new TabularView();
+    private static final AppointmentDAO DAO = new AppointmentDAO();
 
-            dao.saveAppointment(appointment);
+    private static final Map<Character, BiFunction<AppointmentDAO, ? super Console, IO>>
+    FUNCTION_TABLE = new HashMap<>() {
+        {
+            put('l', Appointments.display(LIST_VIEW));
+            put('t', Appointments.display(TABULAR_VIEW));
+            put('a', Appointments.createNew());
+            put('x', (__, ___) -> { System.exit(0); return null; });
+        }
+    };
 
-            return io;
-        };
-    }
+    private static final BiFunction<AppointmentDAO, ? super Console, IO> INVALID_CHOICE = (__, io) ->
+    {
+        io.printLine("Invalid choice"); return io;
+    };
 
-    public static BiFunction<AppointmentDAO, IO, IO> displayAppointments(View view) {
-        return (dao, io) -> {
-            if (dao.appointmentsCount() > 0)
-                io.print(view.display(dao));
-            else
-                io.printLine("No appointments found");
-            return io;
-        };
+    public static void main(String[] args) {
+        while (true) {
+            Optional.ofNullable(FUNCTION_TABLE.get(CONSOLE.choice(MENU)))
+                    .ifPresentOrElse(
+                            f -> f.apply(DAO, CONSOLE),
+                            () -> INVALID_CHOICE.apply(DAO, CONSOLE));
+        }
     }
 }
