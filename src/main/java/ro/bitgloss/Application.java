@@ -28,22 +28,16 @@ public class Application {
         {
             put('l', Appointments.display(LIST_VIEW));
             put('t', Appointments.display(TABULAR_VIEW));
-            put('a', Appointments.createNew());
+            put('a', Appointments.addNew());
             put('x', (__, ___) -> { System.exit(0); return null; });
         }
     };
 
-    private static final BiFunction<AppointmentDAO, ? super Console, IO> INVALID_CHOICE = (__, io) ->
-    {
-        io.printLine("Invalid choice"); return io;
-    };
-
     public static void main(String[] args) {
-        while (true) {
-            Optional.ofNullable(FUNCTION_TABLE.get(CONSOLE.choice(MENU)))
-                    .ifPresentOrElse(
-                            f -> f.apply(DAO, CONSOLE),
-                            () -> INVALID_CHOICE.apply(DAO, CONSOLE));
-        }
+        Optional.ofNullable(FUNCTION_TABLE.get(CONSOLE.choice(MENU)))
+                .ifPresentOrElse(
+                        f -> f.apply(DAO, CONSOLE),
+                        () -> CONSOLE.printLine("Invalid choice"));
+        main(args);
     }
 }

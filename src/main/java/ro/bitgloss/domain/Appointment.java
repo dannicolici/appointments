@@ -1,58 +1,58 @@
 package ro.bitgloss.domain;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 public class Appointment {
 
-  private long id;
-  private Date date;
-  private String doctor;
-  private String patient;
-  private List<String> comments;
+    private long id;
+    private LocalDate date;
+    private String doctor;
+    private String patient;
+    private List<String> comments;
 
-  public Date getDate() {
-    return date;
-  }
+    public LocalDate getDate() {
+        return date;
+    }
 
-  public void setDate(Date date) {
-    this.date = date;
-  }
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
 
-  public String getDoctor() {
-    return doctor;
-  }
+    public String getDoctor() {
+        return doctor;
+    }
 
-  public void setDoctor(String doctor) {
-    this.doctor = doctor;
-  }
+    public void setDoctor(String doctor) {
+        this.doctor = doctor;
+    }
 
-  public String getPatient() {
-    return patient;
-  }
+    public String getPatient() {
+        return patient;
+    }
 
-  public void setPatient(String patient) {
-    this.patient = patient;
-  }
+    public void setPatient(String patient) {
+        this.patient = patient;
+    }
 
-  public List<String> getComments() {
-    return comments;
-  }
+    public List<String> getComments() {
+        return comments;
+    }
 
-  public void setComments(List<String> comments) {
-    this.comments = comments;
-  }
+    public void setComments(List<String> comments) {
+        this.comments = comments;
+    }
 
-  public long getId() {
-    return id;
-  }
+    public long getId() {
+        return id;
+    }
 
-  public void setId(long id) {
-    this.id = id;
-  }
+    public void setId(long id) {
+        this.id = id;
+    }
 
-  public boolean isExpired() {
-    long time = date != null ? date.getTime() : new Date(1970, 1, 1).getTime();
-    return (System.currentTimeMillis() - time) / 1000 > 3600 * 24 * 30 * 6;
-  }
+    public boolean isExpired() {
+        return date.isBefore(LocalDate.now()) && Period.between(date, LocalDate.now()).getMonths() > 6;
+    }
 }

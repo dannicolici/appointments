@@ -10,7 +10,7 @@ import java.util.function.BiFunction;
 
 public class Appointments {
 
-    public static BiFunction<AppointmentDAO, TypedIO, IO> createNew() {
+    public static BiFunction<AppointmentDAO, TypedIO, IO> addNew() {
         return (dao, io) -> {
             var appointment = new Appointment();
             io.readDate("Enter time: ", "invalid date", appointment::setDate);
@@ -25,10 +25,10 @@ public class Appointments {
 
     public static BiFunction<AppointmentDAO, IO, IO> display(View view) {
         return (dao, io) -> {
-            if (dao.appointmentsCount() > 0)
-                io.print(view.display(dao));
-            else
-                io.printLine("No appointments found");
+            switch (dao.appointmentsCount()) {
+                case 0  -> io.printLine("No appointments found");
+                default -> io.print(view.display(dao));
+            }
             return io;
         };
     }

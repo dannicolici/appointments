@@ -5,7 +5,7 @@ plugins {
 group 'ro.bitgloss'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 12
+sourceCompatibility = JavaVersion.VERSION_12
 
 repositories {
     mavenCentral()
@@ -19,4 +19,12 @@ dependencies {
     testRuntime("org.junit.platform:junit-platform-launcher:1.4.2")
     testRuntime("org.junit.jupiter:junit-jupiter-engine:5.4.2")
     testRuntime("org.junit.vintage:junit-vintage-engine:5.4.2")
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs += ['--enable-preview']
+}
+
+test {
+    jvmArgs(['--enable-preview'])
 }

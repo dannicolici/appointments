@@ -39,7 +39,7 @@ public class AppointmentDAO implements DataSource {
     return DB.stream()
             .map(a ->
                     Arrays.asList(
-                            a.isExpired() ? "EXPIRED" : TypedIO.DF.format(a.getDate()),
+                            a.isExpired() ? "EXPIRED" : a.getDate().format(TypedIO.DF),
                             a.getDoctor(),
                             a.getPatient()));
   }

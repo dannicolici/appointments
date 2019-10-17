@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import ro.bitgloss.dao.AppointmentDAO;
 import ro.bitgloss.io.TypedIO;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -48,11 +49,11 @@ public class CreateNewAppointmentTest {
     io.readBuffer.offer("doctor");
     io.readBuffer.offer("patient");
 
-    Appointments.createNew().apply(dao, io);
+    Appointments.addNew().apply(dao, io);
 
     assertEquals(1, dao.appointmentsCount());
     var appointment = dao.findByIndex(0);
-    assertEquals(new Date(2018 - 1900, 9, 20), appointment.getDate());
+    assertEquals(LocalDate.of(2018, 10, 20), appointment.getDate());
     assertEquals("doctor", appointment.getDoctor());
     assertEquals("patient", appointment.getPatient());
   }
@@ -64,11 +65,11 @@ public class CreateNewAppointmentTest {
     io.readBuffer.offer("doctor");
     io.readBuffer.offer("patient");
 
-    Appointments.createNew().apply(dao, io);
+    Appointments.addNew().apply(dao, io);
 
     assertEquals(1, dao.appointmentsCount());
     var appointment = dao.findByIndex(0);
-    assertEquals(new Date(2018 - 1900, 9, 20), appointment.getDate());
+    assertEquals(LocalDate.of(2018, 10, 20), appointment.getDate());
     assertEquals("doctor", appointment.getDoctor());
     assertEquals("patient", appointment.getPatient());
   }
