@@ -2,7 +2,6 @@ package ro.bitgloss.domain;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.List;
 
 public class Appointment {
 
@@ -10,7 +9,7 @@ public class Appointment {
     private LocalDate date;
     private String doctor;
     private String patient;
-    private List<String> comments;
+    private String comments;
 
     public LocalDate getDate() {
         return date;
@@ -36,11 +35,11 @@ public class Appointment {
         this.patient = patient;
     }
 
-    public List<String> getComments() {
+    public String getComments() {
         return comments;
     }
 
-    public void setComments(List<String> comments) {
+    public void setComments(String comments) {
         this.comments = comments;
     }
 
@@ -54,5 +53,25 @@ public class Appointment {
 
     public boolean isExpired() {
         return date.isBefore(LocalDate.now()) && Period.between(date, LocalDate.now()).getMonths() > 6;
+    }
+
+    public Appointment withDate(LocalDate date) {
+        this.date = date;
+        return this;
+    }
+
+    public Appointment withDoctor(String doctor) {
+        this.doctor = doctor;
+        return this;
+    }
+
+    public Appointment withPatient(String patient) {
+        this.patient = patient;
+        return this;
+    }
+
+    public Appointment withComments(String comments) {
+        this.comments = comments;
+        return this;
     }
 }

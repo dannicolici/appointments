@@ -48,6 +48,7 @@ public class CreateNewAppointmentTest {
     io.readBuffer.offer("20/10/2018");
     io.readBuffer.offer("doctor");
     io.readBuffer.offer("patient");
+    io.readBuffer.offer("comments");
 
     Appointments.addNew().apply(dao, io);
 
@@ -56,6 +57,7 @@ public class CreateNewAppointmentTest {
     assertEquals(LocalDate.of(2018, 10, 20), appointment.getDate());
     assertEquals("doctor", appointment.getDoctor());
     assertEquals("patient", appointment.getPatient());
+    assertEquals("comments", appointment.getComments());
   }
 
   @Test
@@ -64,6 +66,7 @@ public class CreateNewAppointmentTest {
     io.readBuffer.offer("20/10/2018");
     io.readBuffer.offer("doctor");
     io.readBuffer.offer("patient");
+    io.readBuffer.offer("comments");
 
     Appointments.addNew().apply(dao, io);
 
@@ -72,6 +75,7 @@ public class CreateNewAppointmentTest {
     assertEquals(LocalDate.of(2018, 10, 20), appointment.getDate());
     assertEquals("doctor", appointment.getDoctor());
     assertEquals("patient", appointment.getPatient());
+    assertEquals("comments", appointment.getComments());
   }
 
 }

@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 public class AppointmentDAO implements DataSource {
 
   private static List<Appointment> DB = new ArrayList<>();
+  private static final List<String> HEADERS = Arrays.asList("TIME", "DOCTOR", "PATIENT", "COMMENTS");
 
   public int appointmentsCount() {
     return DB.size();
@@ -31,7 +32,7 @@ public class AppointmentDAO implements DataSource {
 
   @Override
   public List<String> entryDetails() {
-    return Arrays.asList("TIME", "DOCTOR", "PATIENT");
+    return HEADERS;
   }
 
   @Override
@@ -41,6 +42,7 @@ public class AppointmentDAO implements DataSource {
                     Arrays.asList(
                             a.isExpired() ? "EXPIRED" : a.getDate().format(TypedIO.DF),
                             a.getDoctor(),
-                            a.getPatient()));
+                            a.getPatient(),
+                            a.getComments()));
   }
 }

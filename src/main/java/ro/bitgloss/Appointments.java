@@ -16,6 +16,7 @@ public class Appointments {
             io.readDate("Enter time: ", "invalid date", appointment::setDate);
             io.readString("Enter doctor: ", "", appointment::setDoctor);
             io.readString("Enter patient: ", "", appointment::setPatient);
+            io.readString("Enter comments (if any): ", "", appointment::setComments);
 
             dao.saveAppointment(appointment);
 
