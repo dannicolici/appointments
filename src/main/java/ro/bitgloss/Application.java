@@ -1,8 +1,8 @@
 package ro.bitgloss;
 
 import ro.bitgloss.dao.AppointmentDAO;
-import ro.bitgloss.io.Console;
-import ro.bitgloss.io.IO;
+import io.Console;
+import io.IO;
 import ro.bitgloss.view.ListView;
 import ro.bitgloss.view.TabularView;
 

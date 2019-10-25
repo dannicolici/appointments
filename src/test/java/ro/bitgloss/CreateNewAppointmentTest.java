@@ -3,7 +3,7 @@ package ro.bitgloss;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ro.bitgloss.dao.AppointmentDAO;
-import ro.bitgloss.io.TypedIO;
+import io.TypedIO;
 
 import java.time.LocalDate;
 import java.util.*;

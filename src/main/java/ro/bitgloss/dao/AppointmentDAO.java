@@ -2,7 +2,7 @@ package ro.bitgloss.dao;
 
 import ro.bitgloss.data.DataSource;
 import ro.bitgloss.domain.Appointment;
-import ro.bitgloss.io.TypedIO;
+import io.TypedIO;
 
 import java.util.ArrayList;
 import java.util.Arrays;

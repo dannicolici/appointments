@@ -2,8 +2,8 @@ package ro.bitgloss;
 
 import ro.bitgloss.dao.AppointmentDAO;
 import ro.bitgloss.domain.Appointment;
-import ro.bitgloss.io.IO;
-import ro.bitgloss.io.TypedIO;
+import io.IO;
+import io.TypedIO;
 import ro.bitgloss.view.View;
 
 import java.util.function.BiFunction;

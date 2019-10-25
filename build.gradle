@@ -9,6 +9,7 @@ sourceCompatibility = JavaVersion.VERSION_12
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -19,6 +20,8 @@ dependencies {
     testRuntime("org.junit.platform:junit-platform-launcher:1.4.2")
     testRuntime("org.junit.jupiter:junit-jupiter-engine:5.4.2")
     testRuntime("org.junit.vintage:junit-vintage-engine:5.4.2")
+
+    implementation('com.github.dannicolici:io:1.0.0-release')
 }
 
 tasks.withType(JavaCompile) {
