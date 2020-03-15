@@ -12,11 +12,13 @@ import java.util.Optional;
 import java.util.function.BiFunction;
 
 public class Application {
-    private static final String MENU = "Menu\n" +
-    "l - list view\n" +
-    "t - tabular view\n" +
-    "a - add new appointment\n" +
-    "x - exit";
+    private static final String MENU = """
+    Menu
+    l - list view
+    t - tabular view
+    a - add new appointment
+    x - exit
+    """;
 
     private static final Console CONSOLE = Console.getInstance();
     private static final ListView LIST_VIEW = new ListView();
