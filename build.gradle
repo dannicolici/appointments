@@ -5,7 +5,7 @@ plugins {
 group 'ro.bitgloss'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = JavaVersion.VERSION_13
+sourceCompatibility = JavaVersion.VERSION_14
 
 repositories {
     mavenCentral()
@@ -21,7 +21,7 @@ dependencies {
     testRuntime("org.junit.jupiter:junit-jupiter-engine:5.4.2")
     testRuntime("org.junit.vintage:junit-vintage-engine:5.4.2")
 
-    implementation('com.github.dannicolici:io:1.0.0-release')
+    implementation('com.github.dannicolici:io:1.0.2-release')
 }
 
 tasks.withType(JavaCompile) {
