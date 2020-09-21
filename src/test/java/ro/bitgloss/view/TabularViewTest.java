@@ -34,7 +34,7 @@ public class TabularViewTest {
                     --------------------------
                     """;
     
-    var actual = new TabularView().apply(ds);
+    var actual = TabularView.format.apply(ds);
     
     assertEquals(expected, actual);
   }

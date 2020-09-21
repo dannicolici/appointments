@@ -50,7 +50,7 @@ public class CreateNewAppointmentTest {
     io.readBuffer.offer("patient");
     io.readBuffer.offer("comments");
 
-    Appointments.addNew().accept(dao, io);
+    Appointments.addNew.accept(dao, io);
 
     assertEquals(1, dao.appointmentsCount());
     var appointment = dao.findByIndex(0);
@@ -68,7 +68,7 @@ public class CreateNewAppointmentTest {
     io.readBuffer.offer("patient");
     io.readBuffer.offer("comments");
 
-    Appointments.addNew().accept(dao, io);
+    Appointments.addNew.accept(dao, io);
 
     assertEquals(1, dao.appointmentsCount());
     var appointment = dao.findByIndex(0);

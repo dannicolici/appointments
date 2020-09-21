@@ -25,9 +25,9 @@ public class Application {
     private static final Map<Character, BiConsumer<AppointmentDAO, ? super Console>>
             FUNCTION_TABLE = new HashMap<>() {
         {
-            put('l', Appointments.display(new ListView()));
-            put('t', Appointments.display(new TabularView()));
-            put('a', Appointments.addNew());
+            put('l', Appointments.display(ListView.format));
+            put('t', Appointments.display(TabularView.format));
+            put('a', Appointments.addNew);
             put('x', (_1, _2) -> System.exit(0));
         }
     };

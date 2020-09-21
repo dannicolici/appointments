@@ -4,12 +4,9 @@ import ro.bitgloss.data.DataSource;
 
 import java.util.function.Function;
 
-public class ListView implements Function<DataSource, String> {
+public class ListView {
 
-  @Override
-  public String apply(DataSource ds) {
-    return header(ds).append(data(ds)).toString();
-  }
+  public static Function<DataSource, String> format = ds -> header(ds).append(data(ds)).toString();
 
   private static StringBuilder data(DataSource ds) {
     StringBuilder sb = new StringBuilder();

@@ -29,7 +29,7 @@ public class ListViewTest {
     };
     var expected = "Details (text, other text):\n- data, other data;\n- x, y;\n";
 
-    var actual = new ListView().apply(ds);
+    var actual = ListView.format.apply(ds);
 
     assertEquals(expected, actual);
   }

@@ -5,12 +5,11 @@ import ro.bitgloss.data.DataSource;
 import java.util.List;
 import java.util.function.Function;
 
-public class TabularView implements Function<DataSource, String> {
+public class TabularView {
 
   private static final String PAD = "          ";
 
-  @Override
-  public String apply(DataSource ds) {
+  public static Function<DataSource, String> format = ds -> {
     StringBuilder sb = new StringBuilder();
     String rowSeparator = rowSeparator(ds.entryDetails());
     sb.append(rowSeparator);
@@ -20,7 +19,7 @@ public class TabularView implements Function<DataSource, String> {
     sb.append(rowSeparator);
 
     return sb.toString();
-  }
+  };
 
   private static StringBuilder data(DataSource ds) {
     StringBuilder sb = new StringBuilder();
@@ -46,9 +45,6 @@ public class TabularView implements Function<DataSource, String> {
   private static String rowSeparator(List<String> headers) {
     int headersCharCount = headers.stream().mapToInt(String::length).sum();
     int rowSize = headersCharCount + PAD.length() * 2 * headers.size() + headers.size() + 1;
-    StringBuilder sb = new StringBuilder();
-    sb.append("-".repeat(Math.max(0, rowSize)));
-    sb.append("\n");
-    return sb.toString();
+    return "-".repeat(Math.max(0, rowSize)) + "\n";
   }
 }
