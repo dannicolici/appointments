@@ -1,12 +1,13 @@
 package ro.bitgloss;
 
 import ro.bitgloss.dao.AppointmentDAO;
+import ro.bitgloss.data.DataSource;
 import ro.bitgloss.domain.Appointment;
 import io.IO;
 import io.TypedIO;
-import ro.bitgloss.view.View;
 
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
 public class Appointments {
 
@@ -24,12 +25,11 @@ public class Appointments {
         };
     }
 
-    public static BiFunction<AppointmentDAO, IO, IO> display(View view) {
+    public static BiFunction<AppointmentDAO, IO, IO> display(Function<DataSource, String> view) {
         return (dao, io) -> {
-            switch (dao.appointmentsCount()) {
-                case 0  -> io.printLine("No appointments found");
-                default -> io.print(view.display(dao));
-            }
+            io.print(dao.appointmentsCount() == 0 ?
+                    "No appointments found\n" :
+                    view.apply(dao));
             return io;
         };
     }

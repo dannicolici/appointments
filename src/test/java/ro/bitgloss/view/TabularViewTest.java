@@ -17,7 +17,7 @@ public class TabularViewTest {
     var ds = new DataSource() {
       @Override
       public List<String> entryDetails() {
-        return Arrays.asList("text");
+        return Collections.singletonList("text");
       }
 
       @Override
@@ -26,13 +26,15 @@ public class TabularViewTest {
       }
     };
     var expected =
-        "--------------------------\n" +
-        "|          text          |\n" +
-        "--------------------------\n" +
-        "          data          \n" +
-        "--------------------------\n";
+            """
+                    --------------------------
+                    |          text          |
+                    --------------------------
+                              data         \s
+                    --------------------------
+                    """;
     
-    var actual = new TabularView().display(ds);
+    var actual = new TabularView().apply(ds);
     
     assertEquals(expected, actual);
   }

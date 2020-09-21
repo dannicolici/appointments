@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import ro.bitgloss.data.DataSource;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -16,7 +17,7 @@ public class ListViewTest {
     var ds = new DataSource() {
       @Override
       public List<String> entryDetails() {
-        return Arrays.asList("text, other text");
+        return Collections.singletonList("text, other text");
       }
 
       @Override
@@ -28,7 +29,7 @@ public class ListViewTest {
     };
     var expected = "Details (text, other text):\n- data, other data;\n- x, y;\n";
 
-    var actual = new ListView().display(ds);
+    var actual = new ListView().apply(ds);
 
     assertEquals(expected, actual);
   }
