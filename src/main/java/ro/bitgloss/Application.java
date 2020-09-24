@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.function.BiConsumer;
 
 import static java.util.Optional.ofNullable;
+import static ro.bitgloss.Appointments.*;
 
 public class Application {
     private static final String MENU = """
@@ -25,9 +26,9 @@ public class Application {
     private static final Map<Character, BiConsumer<AppointmentDAO, ? super Console>>
             FUNCTION_TABLE = new HashMap<>() {
         {
-            put('l', Appointments.display(ListView.format));
-            put('t', Appointments.display(TabularView.format));
-            put('a', Appointments.addNew);
+            put('l', display.apply(ListView.format));
+            put('t', display.apply(TabularView.format));
+            put('a', addNew);
             put('x', (_1, _2) -> System.exit(0));
         }
     };
