@@ -11,22 +11,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AppointmentsDataSourceTest {
 
-    private final AppointmentDAO dao = new AppointmentDAO();
-
     @Test
     public void comment_headers_are_displayed() {
-        assertEquals(asList("TIME", "DOCTOR", "PATIENT", "COMMENTS"), dao.entryDetails());
+        assertEquals(asList("TIME", "DOCTOR", "PATIENT", "COMMENTS"), AppointmentDAO.HEADERS);
     }
 
     @Test
     public void comments_are_shown_in_details() {
-        dao.saveAppointment(new Appointment()
+        AppointmentDAO.save.accept(new Appointment()
                 .withDate(LocalDate.now())
                 .withDoctor("D")
                 .withPatient("P")
                 .withComments("comments"));
 
-        assertTrue(dao.stream().anyMatch(l -> l.contains("comments")));
+        assertTrue(AppointmentDAO.content.get().anyMatch(l -> l.contains("comments")));
     }
 
 }

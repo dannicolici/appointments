@@ -1,16 +1,18 @@
 package ro.bitgloss.view;
 
-import ro.bitgloss.data.DataSource;
-
-import java.util.function.Function;
+import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class ListView {
 
-  public static Function<DataSource, String> format = ds -> header(ds).append(data(ds)).toString();
+  public static BiFunction<List<String>, Supplier<Stream<List<String>>>, String> listFormat =
+          (headers, content) -> header(headers).append(data(content)).toString();
 
-  private static StringBuilder data(DataSource ds) {
+  private static StringBuilder data(Supplier<Stream<List<String>>> content) {
     StringBuilder sb = new StringBuilder();
-    ds.stream().forEach(row -> {
+    content.get().forEach(row -> {
       sb.append("- ");
       row.forEach(item -> sb.append(item).append(", "));
       sb.delete(sb.length() - 2, sb.length()).append(";\n");
@@ -19,10 +21,10 @@ public class ListView {
     return sb;
   }
 
-  private static StringBuilder header(DataSource ds) {
+  private static StringBuilder header(List<String> hs) {
     StringBuilder sb = new StringBuilder();    
     sb.append("Details (");
-    ds.entryDetails().forEach(d -> sb.append(d).append(", "));
+    hs.forEach(d -> sb.append(d).append(", "));
     sb.delete(sb.length() - 2, sb.length()).append("):\n");
 
     return sb;

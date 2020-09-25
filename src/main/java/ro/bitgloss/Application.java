@@ -1,18 +1,22 @@
 package ro.bitgloss;
 
 import io.Console;
-import ro.bitgloss.dao.AppointmentDAO;
-import ro.bitgloss.view.ListView;
-import ro.bitgloss.view.TabularView;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 import static java.util.Optional.ofNullable;
-import static ro.bitgloss.Appointments.*;
+import static ro.bitgloss.Appointments.addNew;
+import static ro.bitgloss.Appointments.display;
+import static ro.bitgloss.dao.AppointmentDAO.*;
+import static ro.bitgloss.view.ListView.listFormat;
+import static ro.bitgloss.view.TabularView.tabularFormat;
 
 public class Application {
+
+    private final static Console CONSOLE = Console.getInstance();
+
     private static final String MENU = """
             Menu
             l - list view
@@ -21,22 +25,21 @@ public class Application {
             x - exit
             """;
 
-    private static final AppointmentDAO DAO = new AppointmentDAO();
-
-    private static final Map<Character, BiConsumer<AppointmentDAO, ? super Console>>
-            FUNCTION_TABLE = new HashMap<>() {
+    private static final Map<Character, Consumer<? super Console>>
+            CHOICE_TO_FUNCTION = new HashMap<>() {
         {
-            put('l', display.apply(ListView.format));
-            put('t', display.apply(TabularView.format));
-            put('a', addNew);
-            put('x', (_1, _2) -> System.exit(0));
+            put('l', display.apply(listFormat).apply(HEADERS, content));
+            put('t', display.apply(tabularFormat).apply(HEADERS, content));
+            put('a', addNew.apply(save));
+            put('x', (_ignore) -> System.exit(0));
         }
     };
 
     public static void main(String[] args) {
-        Console.getInstance().choice(MENU).flatMap(
-                c -> ofNullable(FUNCTION_TABLE.get(c)))
-                .ifPresent(f -> f.accept(DAO, Console.getInstance()));
+        CONSOLE.choice(MENU)
+                .flatMap(
+                        c -> ofNullable(CHOICE_TO_FUNCTION.get(c)))
+                .ifPresent(f -> f.accept(CONSOLE));
         main(args);
     }
 }

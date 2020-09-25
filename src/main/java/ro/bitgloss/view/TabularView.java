@@ -1,35 +1,36 @@
 package ro.bitgloss.view;
 
-import ro.bitgloss.data.DataSource;
-
 import java.util.List;
-import java.util.function.Function;
+import java.util.function.BiFunction;
+import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class TabularView {
 
     private static final String PAD = "          ";
 
-    public static Function<DataSource, String> format = ds -> {
-        String rowSeparator = rowSeparator(ds.entryDetails());
-        return rowSeparator +
-                headers(ds) +
-                rowSeparator +
-                data(ds) +
-                rowSeparator;
-    };
+    public static BiFunction<List<String>, Supplier<Stream<List<String>>>, String> tabularFormat =
+            (headers, content) -> {
+                String rowSeparator = rowSeparator(headers);
+                return rowSeparator +
+                        headers(headers) +
+                        rowSeparator +
+                        data(content) +
+                        rowSeparator;
+            };
 
-    private static StringBuilder data(DataSource ds) {
+    private static StringBuilder data(Supplier<Stream<List<String>>> content) {
         StringBuilder sb = new StringBuilder();
-        ds.stream().forEach(row -> {
+        content.get().forEach(row -> {
             row.forEach(d -> sb.append(cell(d)));
             sb.append("\n");
         });
         return sb;
     }
 
-    private static StringBuilder headers(DataSource ds) {
+    private static StringBuilder headers(List<String> hs) {
         StringBuilder sb = new StringBuilder();
-        ds.entryDetails().forEach(d -> sb.append("|").append(cell(d)));
+        hs.forEach(d -> sb.append("|").append(cell(d)));
         sb.append("|\n");
 
         return sb;

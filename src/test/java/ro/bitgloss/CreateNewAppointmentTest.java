@@ -1,9 +1,9 @@
 package ro.bitgloss;
 
+import io.TypedIO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ro.bitgloss.dao.AppointmentDAO;
-import io.TypedIO;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -12,10 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CreateNewAppointmentTest {
 
-  private AppointmentDAO dao;
   private TestIO io;
 
-  class TestIO implements TypedIO {
+  static class TestIO implements TypedIO {
 
     List<String> printBuffer = new ArrayList<>();
     Queue<String> readBuffer = new LinkedList<>();
@@ -38,8 +37,7 @@ public class CreateNewAppointmentTest {
 
   @BeforeEach
   public void setUp() {
-    dao = new AppointmentDAO();
-    dao.deleteAllAppointments();
+    AppointmentDAO.deleteAllAppointments();
     io = new TestIO();
   }
   
@@ -50,10 +48,10 @@ public class CreateNewAppointmentTest {
     io.readBuffer.offer("patient");
     io.readBuffer.offer("comments");
 
-    Appointments.addNew.accept(dao, io);
+    Appointments.addNew.apply(AppointmentDAO.save).accept(io);
 
-    assertEquals(1, dao.appointmentsCount());
-    var appointment = dao.findByIndex(0);
+    assertEquals(1, AppointmentDAO.appointmentsCount());
+    var appointment = AppointmentDAO.findByIndex(0);
     assertEquals(LocalDate.of(2018, 10, 20), appointment.getDate());
     assertEquals("doctor", appointment.getDoctor());
     assertEquals("patient", appointment.getPatient());
@@ -68,10 +66,10 @@ public class CreateNewAppointmentTest {
     io.readBuffer.offer("patient");
     io.readBuffer.offer("comments");
 
-    Appointments.addNew.accept(dao, io);
+    Appointments.addNew.apply(AppointmentDAO.save).accept(io);
 
-    assertEquals(1, dao.appointmentsCount());
-    var appointment = dao.findByIndex(0);
+    assertEquals(1, AppointmentDAO.appointmentsCount());
+    var appointment = AppointmentDAO.findByIndex(0);
     assertEquals(LocalDate.of(2018, 10, 20), appointment.getDate());
     assertEquals("doctor", appointment.getDoctor());
     assertEquals("patient", appointment.getPatient());
