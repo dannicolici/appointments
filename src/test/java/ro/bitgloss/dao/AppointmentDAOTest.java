@@ -18,11 +18,8 @@ class AppointmentsDataSourceTest {
 
     @Test
     public void comments_are_shown_in_details() {
-        AppointmentDAO.save.accept(new Appointment()
-                .withDate(LocalDate.now())
-                .withDoctor("D")
-                .withPatient("P")
-                .withComments("comments"));
+        AppointmentDAO.save.accept(new Appointment(
+                LocalDate.now(),"D", "P","comments"));
 
         assertTrue(AppointmentDAO.content.get().anyMatch(l -> l.contains("comments")));
     }

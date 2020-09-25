@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import static java.util.Optional.ofNullable;
 import static ro.bitgloss.Appointments.addNew;
 import static ro.bitgloss.Appointments.display;
 import static ro.bitgloss.dao.AppointmentDAO.*;

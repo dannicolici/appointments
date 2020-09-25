@@ -16,11 +16,11 @@ public class Appointments {
     public static Function<Consumer<Appointment>, Consumer<TypedIO>> addNew =
             dao ->
                     io -> {
-                        var appointment = new Appointment();
-                        io.readDate("Enter time: ", "invalid date", appointment::setDate);
-                        io.readString("Enter doctor: ", "", appointment::setDoctor);
-                        io.readString("Enter patient: ", "", appointment::setPatient);
-                        io.readString("Enter comments (if any): ", "", appointment::setComments);
+                        var appointment = new Appointment(
+                                io.readDate("Enter date: ", "invalid date"),
+                                io.readString("Enter doctor: ", "").orElse(""),
+                                io.readString("Enter patient: ", "").orElse(""),
+                                io.readString("Enter comments (if any): ", "").orElse(""));
 
                         dao.accept(appointment);
                     };

@@ -52,10 +52,10 @@ public class CreateNewAppointmentTest {
 
     assertEquals(1, AppointmentDAO.appointmentsCount());
     var appointment = AppointmentDAO.findByIndex(0);
-    assertEquals(LocalDate.of(2018, 10, 20), appointment.getDate());
-    assertEquals("doctor", appointment.getDoctor());
-    assertEquals("patient", appointment.getPatient());
-    assertEquals("comments", appointment.getComments());
+    assertEquals(LocalDate.of(2018, 10, 20), appointment.date());
+    assertEquals("doctor", appointment.doctor());
+    assertEquals("patient", appointment.patient());
+    assertEquals("comments", appointment.comments());
   }
 
   @Test
@@ -70,10 +70,10 @@ public class CreateNewAppointmentTest {
 
     assertEquals(1, AppointmentDAO.appointmentsCount());
     var appointment = AppointmentDAO.findByIndex(0);
-    assertEquals(LocalDate.of(2018, 10, 20), appointment.getDate());
-    assertEquals("doctor", appointment.getDoctor());
-    assertEquals("patient", appointment.getPatient());
-    assertEquals("comments", appointment.getComments());
+    assertEquals(LocalDate.of(2018, 10, 20), appointment.date());
+    assertEquals("doctor", appointment.doctor());
+    assertEquals("patient", appointment.patient());
+    assertEquals("comments", appointment.comments());
   }
 
 }

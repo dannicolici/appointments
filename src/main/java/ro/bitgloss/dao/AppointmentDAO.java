@@ -33,8 +33,8 @@ public class AppointmentDAO {
      DB.stream()
             .map(a ->
                     Arrays.asList(
-                            a.isExpired() ? "EXPIRED" : a.getDate().format(TypedIO.DF),
-                            a.getDoctor(),
-                            a.getPatient(),
-                            a.getComments()));
+                            a.isExpired() ? "EXPIRED" : a.date().format(TypedIO.DF),
+                            a.doctor(),
+                            a.patient(),
+                            a.comments()));
 }
