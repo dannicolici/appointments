@@ -14,6 +14,8 @@ import static ro.bitgloss.view.TabularView.tabularFormat;
 
 public class Application {
 
+    static { HttpApplication.startHttpEndpoints(); }
+
     private final static Console CONSOLE = Console.getInstance();
 
     private static final String MENU = """

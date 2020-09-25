@@ -22,6 +22,7 @@ dependencies {
     testRuntime("org.junit.vintage:junit-vintage-engine:5.4.2")
 
     implementation('com.github.dannicolici:io:1.0.2-release')
+    implementation('com.sparkjava:spark-core:2.9.2')
 }
 
 tasks.withType(JavaCompile) {

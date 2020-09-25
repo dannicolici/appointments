@@ -5,6 +5,7 @@ import ro.bitgloss.domain.Appointment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -12,7 +13,7 @@ import java.util.stream.Stream;
 
 public class AppointmentDAO {
 
-  private static List<Appointment> DB = new ArrayList<>();
+  private static List<Appointment> DB = Collections.synchronizedList(new ArrayList<>());
   public static final List<String> HEADERS = Arrays.asList("TIME", "DOCTOR", "PATIENT", "COMMENTS");
 
   public static int appointmentsCount() {
