@@ -37,8 +37,7 @@ public class Application {
 
     public static void main(String[] args) {
         CONSOLE.choice(MENU)
-                .flatMap(
-                        c -> ofNullable(CHOICE_TO_FUNCTION.get(c)))
+                .map(CHOICE_TO_FUNCTION::get)
                 .ifPresent(f -> f.accept(CONSOLE));
         main(args);
     }
