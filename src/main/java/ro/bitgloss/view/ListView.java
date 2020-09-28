@@ -1,16 +1,17 @@
 package ro.bitgloss.view;
 
-import java.util.List;
-import java.util.function.BiFunction;
+import ro.bitgloss.Types.View;
+
+import java.util.Collection;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class ListView {
 
-  public static BiFunction<List<String>, Supplier<Stream<List<String>>>, String> listFormat =
-          (headers, content) -> header(headers).append(data(content)).toString();
+  public static View listFormat = (headers, content) ->
+          header(headers).append(data(content)).toString();
 
-  private static StringBuilder data(Supplier<Stream<List<String>>> content) {
+  private static StringBuilder data(Supplier<Stream<Collection<String>>> content) {
     StringBuilder sb = new StringBuilder();
     content.get().forEach(row -> {
       sb.append("- ");
@@ -21,8 +22,8 @@ public class ListView {
     return sb;
   }
 
-  private static StringBuilder header(List<String> hs) {
-    StringBuilder sb = new StringBuilder();    
+  private static StringBuilder header(Collection<String> hs) {
+    StringBuilder sb = new StringBuilder();
     sb.append("Details (");
     hs.forEach(d -> sb.append(d).append(", "));
     sb.delete(sb.length() - 2, sb.length()).append("):\n");
