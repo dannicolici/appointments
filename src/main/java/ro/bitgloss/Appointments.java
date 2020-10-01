@@ -12,15 +12,11 @@ import java.util.function.Function;
 public class Appointments {
 
     public static ReadWriter<Appointment, TypedIO> addNew =
-            writer -> reader -> {
-                var appointment = new Appointment(
-                        reader.readDate("Enter date: ", "invalid date"),
-                        reader.readString("Enter doctor: ", "").orElse(""),
-                        reader.readString("Enter patient: ", "").orElse(""),
-                        reader.readString("Enter comments (if any): ", "").orElse(""));
-
-                writer.accept(appointment);
-            };
+            writer -> reader -> writer.accept(new Appointment(
+                    reader.readDate("Enter date: ", "invalid date"),
+                    reader.readString("Enter doctor: ", "").orElse(""),
+                    reader.readString("Enter patient: ", "").orElse(""),
+                    reader.readString("Enter comments (if any): ", "").orElse("")));
 
     public static Function<View, ViewWriter<IO>> display = view ->
             (headers, content) -> io ->
