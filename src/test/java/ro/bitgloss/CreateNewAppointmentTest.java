@@ -1,39 +1,16 @@
 package ro.bitgloss;
 
-import io.TypedIO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ro.bitgloss.dao.AppointmentDAO;
 
 import java.time.LocalDate;
-import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CreateNewAppointmentTest {
 
   private TestIO io;
-
-  static class TestIO implements TypedIO {
-
-    List<String> printBuffer = new ArrayList<>();
-    Queue<String> readBuffer = new LinkedList<>();
-
-    @Override
-    public void print(Object o) {
-      printBuffer.add(o.toString());
-    }
-
-    @Override
-    public void printLine(Object o) {
-      printBuffer.add(o + "\n");
-    }
-
-    @Override
-    public Optional<String> readString(String prompt, String errorMessage) {
-      return Optional.of(readBuffer.remove());
-    }
-  }
 
   @BeforeEach
   public void setUp() {
