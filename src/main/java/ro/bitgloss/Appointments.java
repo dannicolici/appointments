@@ -8,8 +8,7 @@ import ro.bitgloss.Types.ViewWriter;
 import ro.bitgloss.domain.Appointment;
 
 import java.util.function.Function;
-
-import static java.util.stream.Stream.of;
+import java.util.stream.Stream;
 
 public class Appointments {
 
@@ -23,7 +22,7 @@ public class Appointments {
     public static Function<View, ViewWriter<IO>> display = view ->
             (headers, content) -> io ->
                     content.get().findAny().ifPresentOrElse(
-                            data -> io.print(view.apply(headers, () -> of(data))),
+                            data -> io.print(view.apply(headers, () -> Stream.of(data))),
                             () -> io.print("No appointments found\n"));
 
 }
