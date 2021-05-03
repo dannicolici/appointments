@@ -5,7 +5,7 @@ plugins {
 group 'ro.bitgloss'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = JavaVersion.VERSION_14
+sourceCompatibility = JavaVersion.VERSION_16
 
 repositories {
     mavenCentral()
@@ -14,12 +14,12 @@ repositories {
 
 dependencies {
     test.useJUnitPlatform()
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.4.2'
-    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.27.0'
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.1")
+    testImplementation("org.mockito:mockito-core:2.27.0")
 
-    testRuntime("org.junit.platform:junit-platform-launcher:1.4.2")
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.4.2")
-    testRuntime("org.junit.vintage:junit-vintage-engine:5.4.2")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:1.4.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.1")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.7.1")
 
     implementation('com.github.dannicolici:io:1.0.2-release')
     implementation('com.sparkjava:spark-core:2.9.2')

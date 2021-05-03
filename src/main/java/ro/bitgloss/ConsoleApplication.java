@@ -15,6 +15,7 @@ import static ro.bitgloss.view.TabularView.tabularFormat;
 public class ConsoleApplication {
 
     private final static Console CONSOLE = Console.getInstance();
+    private static boolean loop = true;
 
     private static final String MENU = """
             Menu
@@ -30,14 +31,14 @@ public class ConsoleApplication {
             put('l', display.apply(listFormat).apply(HEADERS, content));
             put('t', display.apply(tabularFormat).apply(HEADERS, content));
             put('a', addNew.apply(save));
-            put('x', (_ignore) -> System.exit(0));
+            put('x', (_ignore) -> loop = false);
         }
     };
 
     public static void loop() {
-        CONSOLE.choice(MENU)
-                .map(CHOICE_TO_FUNCTION::get)
-                .ifPresent(f -> f.accept(CONSOLE));
-        loop();
+        while (loop)
+            CONSOLE.choice(MENU)
+                    .map(CHOICE_TO_FUNCTION::get)
+                    .ifPresent(f -> f.accept(CONSOLE));
     }
 }
