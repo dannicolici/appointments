@@ -21,8 +21,8 @@ public class Appointments {
 
     public static Function<View, ViewWriter<IO>> display = view ->
             (headers, content) -> io ->
-                    content.get().findAny().ifPresentOrElse(
-                            data -> io.print(view.apply(headers, () -> Stream.of(data))),
-                            () -> io.print("No appointments found\n"));
+                    io.print(content.get().count() == 0 ?
+                            "No appointments found\n" :
+                            view.apply(headers, content));
 
 }
