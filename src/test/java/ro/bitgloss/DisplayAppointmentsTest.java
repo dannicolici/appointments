@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ReadAppointmentsTest {
+public class DisplayAppointmentsTest {
 
     private TestIO io;
 
