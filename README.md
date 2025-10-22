@@ -1,4 +1,7 @@
-# Exercise for adding features to a legacy system
+# Exercise for adding features to a legacy system as presented in
+# Dr. Software - An unfinished journey starting from dirty code
+
+https://bitgloss.ro/dr-software.pdf
 
 ## The legacy system
 - it's a CLI for making and displaying doctor appointments
